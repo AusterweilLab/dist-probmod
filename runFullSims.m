@@ -4,7 +4,7 @@
 global nautyInstalled;
 
 %% NEED TO SET
-%this part sets parameters that determine the current runs of 
+%this part sets parameters that determine the current runs of
 
 dirName = '/mydir/'; %where to save data files (usually about 15MB)
 resFileName = 'may12Runs'; %where to save results (makes intermediate saves)
@@ -12,7 +12,7 @@ latFileName = 'may12TabRes.tex'; %where to save table of results
 
 %kemp & tenenbaum (2008) discrete priors
 %set to 1 to include it in the simulation
-%(right now, partition, chain, tree, and grid are supported, 
+%(right now, partition, chain, tree, and grid are supported,
 %though many more are implemented in charles kemp's code).
 
 runPart = 1;
@@ -60,7 +60,7 @@ I = J;
 
 % path of charles' code (only needed if it is not in your path already.
 % also need to change directory if charles' code does not live there).
-addpath(strcat(pwd, '/formdiscovery1.0/')); 
+addpath(strcat(pwd, '/formdiscovery1.0/'));
 
 
 disp(['------------ making data sets in ''' dirName '''--------------']);
@@ -76,7 +76,7 @@ if runPart
     [curWishLP sampCovs] = setUpKTRuns2(@genRandPartSig,a,b,T,N,M,dirName,sigCov,its);
     lpWishs(curIt) = curWishLP;
     trueSigs{curIt} = sampCovs;
-    prNames{curIt} = genRandPartSigs(-1);
+    prNames{curIt} = genRandPartSig(-1);
     curIt = curIt+1;
 end
 if runChain
@@ -84,7 +84,7 @@ if runChain
     [curWishLP sampCovs] = setUpKTRuns2(@genRandChainSig,a,b,T,N,M,dirName,sigCov,its);
     lpWishs(curIt) = curWishLP;
     trueSigs{curIt} = sampCovs;
-    prNames{curIt} = genRandChainSigs(-1);
+    prNames{curIt} = genRandChainSig(-1);
     curIt = curIt+1;
 end
 if runTree
@@ -92,7 +92,7 @@ if runTree
     [curWishLP sampCovs] = setUpKTRuns2(@genRandTreeSig,a,b,T,N,M,dirName,sigCov,its);
     lpWishs(curIt) = curWishLP;
     trueSigs{curIt} = sampCovs;
-    prNames{curIt} = genRandTreeSigs(-1);
+    prNames{curIt} = genRandTreeSig(-1);
     curIt = curIt+1;
 end
 if runGrid
@@ -100,7 +100,7 @@ if runGrid
     [curWishLP sampCovs] = setUpKTRuns2(@genRandGridSig,a,b,T,N,M,dirName,sigCov,its);
     lpWishs(curIt) = curWishLP;
     trueSigs{curIt} = sampCovs;
-    prNames{curIt} = genRandGridSigs(-1);
+    prNames{curIt} = genRandGridSig(-1);
     curIt = curIt+1;
 end
 
@@ -153,7 +153,7 @@ for j=1:J
             curIt = curIt+1;
         end
     end
-    
+
     for i = 1:length(erdosPs)
         bayesSigs{i+sum(ktChs),j} = bayesSigs2{i,j};
     end
@@ -167,7 +167,7 @@ disp('------------------Starting Bayes-NN comparisons-------------------');
 [bestBDists nnBestBSigs bestTDists nnBestTSigs] = runBNNComps(dirName,T,bayesSigs,trueSigs, ...
                                                               ktChs,erdosPs,runWish,nnFun, ...
                                                               nnCompFun,l_rate,maxEpochs);
-                                                          
+
 disp('------------------Done Bayes-NN comparisons-------------------');
 save(resFileName);
 %% analyses
