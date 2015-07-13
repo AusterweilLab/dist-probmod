@@ -10,5 +10,4 @@ cd nauty25r9
 ./configure
 make
 cd ..
-rm nauty25r9.tar.gz
 echo "installation finished!"
