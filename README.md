@@ -39,6 +39,6 @@ from the command line:
 
 2. `cd dist-probmod`
 
-3. `sh install_dist_probmod`
+3. `sh install_dist_probmod.sh`
 
 4. `matlab -nodesktop -nosplash -r runFullSims`
