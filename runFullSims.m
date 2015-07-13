@@ -15,7 +15,7 @@ latFileName = 'may12TabRes.tex'; %where to save table of results
 %(right now, partition, chain, tree, and grid are supported, 
 %though many more are implemented in charles kemp's code).
 
-runPart = 0;
+runPart = 1;
 runChain = 0;
 runTree = 0;
 runGrid = 0;
@@ -60,7 +60,7 @@ I = J;
 
 % path of charles' code (only needed if it is not in your path already.
 % also need to change directory if charles' code does not live there).
-path(path,'./formdiscovery1.0/'); 
+addpath(strcat(pwd, '/formdiscovery1.0/')); 
 
 
 disp(['------------ making data sets in ''' dirName '''--------------']);
