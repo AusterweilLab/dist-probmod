@@ -29,6 +29,7 @@ All code in './formdiscovery1.0/' was written by Charles Kemp and others (see hi
 
 Requirements:
 --------------
+- Matlab 2011b (hopefully find a fix for newer versions soon)
 - Optimization toolbox
 
 Setting up the Project:
