@@ -30,8 +30,8 @@ runWish = 1;
 %(except wishart normed to have approx. = norm to others
 numOptRuns = 5e4; % i think this can probably be smaller...
 % numOptRuns = 1e3;
-l_rate = 2.5e-3;
-maxEpochs = 3e3;
+l_rate = 5e-3; % was 2.5e-5
+maxEpochs = 5e3; % was 3e3
 
 
 a = 1000;
@@ -50,7 +50,7 @@ nautyInstalled = 1; %best if it is, but if not, set to 0 (charles' code will be 
 %variable containing the function implementing a neural network learning
 %algorithm
 nnFun = @runNN; %standard linear NN grad descent
-
+% nlnnFul = @runNLNN;
 %variable containing the function that finds the  NN covariance
 %matrix "closest" to another covariance matrix
 nnCompFun = @bestNNVars; %YY' conversion

@@ -21,8 +21,8 @@ for t = 1:T
         for k = 1:length(rInds)
             rInd = rInds(k);
             if t == 1
-                for j = 1:J
-                    bayesSigs{k,j} = zeros(N,N,T);
+                for j2 = 1:J
+                    bayesSigs{k,j2} = zeros(N,N,T);
                 end
             end
             

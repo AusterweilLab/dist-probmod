@@ -1,18 +1,18 @@
 function [Ys Zs] = runNN( X, l_rate, maxEpochs )
-    %RUNNN creates a neural network that learns X using learning rate 
+    %RUNNN creates a neural network that learns X using learning rate
     %l_rate, and returns the learned matrix X_NN
     %   Detailed explanation goes here
     Ys = cell(maxEpochs,1);
     Zs = cell(maxEpochs,1);
-    
-    
+
+
     %Y = N by K matrix, K >= rank of X, Y is like the weights
     K = rank(X) + 1;
     Y = random('norm',0,.05,[size(X,1),K]);
 
-    %Z = random K by M matrix, Z is like the representations, the hidden layer 
+    %Z = random K by M matrix, Z is like the representations, the hidden layer
     %activations, we assume it follows a multivariate gaussian dist with mean 0
-    %and covariance sig^2I 
+    %and covariance sig^2I
     % **********I totally don't get this so I just use a random matrix*********
     Z = random('norm',0,.05,[K,size(X,2)]);
     % perform gradient descent on Z and Y, alternating between the two
@@ -24,7 +24,7 @@ function [Ys Zs] = runNN( X, l_rate, maxEpochs )
         end
         Z = Z + delta_z;
         Zs{curEpoch} = Z;
-        
+
         % GD on Y
         delta_y = zeros(size(Y));
         for curYrow = 1:size(Y,1)
@@ -32,7 +32,7 @@ function [Ys Zs] = runNN( X, l_rate, maxEpochs )
         end
         Y = Y + delta_y;
         Ys{curEpoch} = Y;
-        
+
 %         if (mod(curEpoch,10) == 0)
 %             disp(['curr error: ' num2str(sum(sum((X-Y*Z).^2)))]);
 %         end
@@ -43,4 +43,3 @@ function [Ys Zs] = runNN( X, l_rate, maxEpochs )
     end
 %     X_NN = Y*Z;
 end
-
