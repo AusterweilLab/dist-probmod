@@ -20,7 +20,8 @@ for t = 1:T
     for j = 1:J
         for k = 1:length(rInds)
             rInd = rInds(k);
-            if t == 1
+            if ((t == 1) && (j==1))
+                disp(['k: ' num2str(k) ', j: ' num2str(j)]);
                 for j2 = 1:J
                     bayesSigs{k,j2} = zeros(N,N,T);
                 end

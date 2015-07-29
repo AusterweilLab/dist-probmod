@@ -1,17 +1,13 @@
 load('may12Runs.mat');
 ps = setmyps(dirName,T,M, ktChs, erdosPs,runWish);
-disp('------------------starting Charles Kemp''s Code------------------');
-structs = runKT(dirName,T,M,ps,ktChs);
-disp('------------------Charles Kemp''s Code finished------------------');
-save(resFileName);
 disp('------------------Converting Kemp format to Sigs-------------------');
 [ bayesSigs1 tKT1Dists ] = kt2Wish(T,trueSigs,structs,ktChs,erdosPs,runWish);
 save(resFileName);
-disp('------------------Done converting Kemp format-------------------');
-disp('------------------Starting annealing runs (non-KT priors)-------------------');
-[bayesSigs2 tB2Dists] = runAnnealBayes(dirName,T,trueSigs,ktChs,erdosPs,runWish,b,numOptRuns);
-disp('------------------Done running (non-KT priors)-------------------');
-save(resFileName);
+% disp('------------------Done converting Kemp format-------------------');
+% disp('------------------Starting annealing runs (non-KT priors)-------------------');
+% [bayesSigs2 tB2Dists] = runAnnealBayes(dirName,T,trueSigs,ktChs,erdosPs,runWish,b,numOptRuns);
+% disp('------------------Done running (non-KT priors)-------------------');
+% save(resFileName);
 
 bayesSigs = cell(J,J);
 for j=1:J

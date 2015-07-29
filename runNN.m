@@ -39,7 +39,7 @@ function [Ys Zs] = runNN( X, l_rate, maxEpochs )
     end
 
     if sum(sum(X-Y*Z)) > 1
-        disp('WARNING: NN error > 1');
+        disp(['WARNING: NN error > 1: ' sum(sum(X-Y*Z))]);
     end
 %     X_NN = Y*Z;
 end
