@@ -42,4 +42,4 @@ from the command line:
 
 3. `sh install_<your os>.sh`
 
-4. `matlab -nodesktop -nosplash -r runFullSims`
+4. `matlab2011 -nodesktop -nosplash -nojvm -r runFullSims` *(if you're on brie. Otherwise it's just `matlab -nodesktop -nosplash -r runFullSims`)*
