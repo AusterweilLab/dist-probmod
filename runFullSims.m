@@ -50,7 +50,6 @@ nautyInstalled = 1; %best if it is, but if not, set to 0 (charles' code will be 
 %variable containing the function implementing a neural network learning
 %algorithm
 nnFun = @runNN; %standard linear NN grad descent
-% nlnnFul = @runNLNN;
 %variable containing the function that finds the  NN covariance
 %matrix "closest" to another covariance matrix
 nnCompFun = @bestNNVars; %YY' conversion
