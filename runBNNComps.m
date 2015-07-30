@@ -48,7 +48,7 @@ for t = 1:T
             while isinf(bestBDist)
               [bestInd bestBDist bestSig] = nnCompFun(Ys,Zs,sigSig, reshape(bayesSigs{i,j}(:,:,t),[N N]));
               if isinf(bestBDist)
-                  disp('dafdafad');
+                  disp('bestBDist is inf');
               end
             
             end
