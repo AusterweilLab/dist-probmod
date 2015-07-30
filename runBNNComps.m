@@ -44,15 +44,21 @@ for t = 1:T
         load(files{(t-1)*J+j});
         [Ys Zs] = nnFun(data,l_rate,maxEpochs);
         for i = 1:I
-            [bestInd bestBDist bestSig] = nnCompFun(Ys,Zs,sigSig, reshape(bayesSigs{i,j}(:,:,t),[N N]));
+            bestBDist = Inf;
+            while isinf(bestBDist)
+              [bestInd bestBDist bestSig] = nnCompFun(Ys,Zs,sigSig, reshape(bayesSigs{i,j}(:,:,t),[N N]));
+              if isinf(bestBDist)
+                  disp('bestBDist is inf');
+              end
+            
+            end
             bestBDists(i,j,t) = bestBDist;
             nnBestBSigs{i,j}(:,:,t) = reshape(bestSig, [N N 1]);
         end
-        
+
         [bestInd bestTDist bestSig] = nnCompFun(Ys,Zs,sigSig, reshape(trueSigs{j}(:,:,t),[N N]));
         bestTDists(j,t) = bestTDist;
         nnBestTSigs{j}(:,:,t) = reshape(bestSig, [N N 1]);
     end
 end
 end
-
