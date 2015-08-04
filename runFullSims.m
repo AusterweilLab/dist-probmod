@@ -184,12 +184,12 @@ disp(['Spearman correlation between best Bayes-NN Distance and Wishartiness: ' n
 disp(['Kendall correlation between best Bayes-NN Distance and Wishartiness: ' num2str(bNNCorKendall)]);
 
 disp('---------------------------------------------------------------------');
-close all;
-figure(1);
-scatter(lpWishs, meanBDists);
-xlabel('Log Wishart marginal likelihood');
-ylabel('Bayes-NN distance');
-title('Average distance YY^T from Bayesian estimators with different priors');
+% close all;
+% figure(1);
+% scatter(lpWishs, meanBDists);
+% xlabel('Log Wishart marginal likelihood');
+% ylabel('Bayes-NN distance');
+% title('Average distance YY^T from Bayesian estimators with different priors');
 
 [lpWishsSort sortInds] = sort(lpWishs);
 prNamesSort = cell(length(prNames),1);
@@ -200,6 +200,7 @@ end
 
 outMat = [lpWishsSort'; meanBDists(sortInds)'; meanTDists(sortInds)'];
 rowLbls = {'Wishartiness', 'Truth-NN Dist', 'Bayes-NN Dist'};
+save(resFileName);
 matrix2latex(outMat,latFileName,'rowLabels', rowLbls, 'columnLabels', prNamesSort);
 
 save(resFileName);
