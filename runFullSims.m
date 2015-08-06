@@ -161,6 +161,7 @@ for j=1:J
     end
 end
 tBDists = [tKT1Dists tB2Dists];
+
 %% starting NN comparisions
 disp('------------------Starting Bayes-NN comparisons-------------------');
 [bestBDists nnBestBSigs bestTDists nnBestTSigs] = runBNNComps(dirName,T,bayesSigs,trueSigs, ...
@@ -169,10 +170,22 @@ disp('------------------Starting Bayes-NN comparisons-------------------');
 
 disp('------------------Done Bayes-NN comparisons-------------------');
 save(resFileName);
-%% analyses
 
+%% starting non-linear nn comparisons
+disp('------------------Starting Bayes-NLNN comparisons-------------------');
+[bestBDists nnBestBSigs bestTDists nnBestTSigs] = runBNLNNComps(dirName,T,bayesSigs,trueSigs, ...
+                                                              ktChs,erdosPs,runWish,nlnnFun, ...
+                                                              nlnnCompFun,l_rate,maxEpochs);
+
+disp('------------------Done Bayes-NLNN comparisons-------------------');
+save(resFileName);
+
+%% analyses
 disp('------------------Starting analyses-------------------');
 disp('------------------Wishartiness-Bayes-NN dist analyses-------------------');
+
+% TODO: do this same analysis with the nlnn too
+
 meanBDists = mean(mean(bestBDists,3),2);
 meanTDists = mean(bestTDists,2);
 bNNCorPearson = corr(meanBDists, lpWishs);
