@@ -1,4 +1,4 @@
-function [bestBDists nnBestBSigs bestTDists nnBestTSigs] = runBNNComps(dirName,T,bayesSigs,trueSigs,ktChs,erdosPs,runWish,nnFun,nnCompFun,l_rate,maxEpochs,sigSig)
+function [bestBDists nnBestBSigs bestTDists nnBestTSigs bestInds] = runBNNComps(dirName,T,bayesSigs,trueSigs,ktChs,erdosPs,runWish,nnFun,nnCompFun,l_rate,maxEpochs,sigSig)
 %RUNBNNCOMPS
 if nargin < 8
     nnFun = @runNN;
@@ -57,6 +57,7 @@ for t = 1:T
         end
 
         [bestInd bestTDist bestSig] = nnCompFun(Ys,Zs,sigSig, reshape(trueSigs{j}(:,:,t),[N N]));
+        disp(bestInds);
         bestTDists(j,t) = bestTDist;
         nnBestTSigs{j}(:,:,t) = reshape(bestSig, [N N 1]);
     end
