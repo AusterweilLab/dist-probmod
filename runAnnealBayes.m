@@ -28,7 +28,7 @@ end
 
 erdosAnnealRes = cell(I, J, T);
 wishAnnealRes = cell(J, T);
-
+matlabpool(4)
 parfor t = 1:T
     disp(['cur t:' num2str(t) '     out of    ' num2str(T)]);
     for j = 1:J
@@ -45,7 +45,9 @@ parfor t = 1:T
             wishAnnealRes{j,t} = wishCovMat;
         end
     end
+    disp(['t:' num2str(t) ' finished.']);
 end
+matlabpool close
 
 % add to bayesSigs
 disp('processing annealing results...');
