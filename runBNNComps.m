@@ -25,6 +25,7 @@ bestBDists = zeros(I,J,T);
 bestTDists = zeros(J,T);
 nnBestBSigs = cell(I,J);
 nnBestTSigs = cell(J);
+bestInds = zeros(I,J,T);
 files = getFileList(dirName,T,ktChs,erdosPs,runWish);
 load(files{1});
 N = objcount;
@@ -53,6 +54,7 @@ for t = 1:T
 
             end
             bestBDists(i,j,t) = bestBDist;
+            bestInds(i,j,t) = bestInd;
             nnBestBSigs{i,j}(:,:,t) = reshape(bestSig, [N N 1]);
         end
 
