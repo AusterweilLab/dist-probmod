@@ -34,8 +34,8 @@ l_rate = 5e-3; % was 2.5e-5
 maxEpochs = 5e3; % was 3e3
 
 
-a = 1000;
-b = 1000;
+a = 10;
+b = 10;
 N = 10;
 T = 100;
 M = 100;
