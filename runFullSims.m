@@ -186,7 +186,9 @@ disp(['Kendall correlation between best Bayes-NN Distance and Wishartiness: ' nu
 disp('---------------------------------------------------------------------');
 close all;
 figure(1);
-scatter(lpWishs, meanBDists);
+scatter(lpWishs, meanBDists, [], linspace(1,10,length(meanBDists)));
+labels = {'Part','Chain','Tree','Grid','erdosPs1','erdosPs2','erdosPs3','Wishart'}; dx = -0.4; dy = -0.4;
+text(lpWishs+dx,meanBDists+dy, labels)
 xlabel('Log Wishart marginal likelihood');
 ylabel('Bayes-NN distance');
 title('Average distance YY^T from Bayesian estimators with different priors');
