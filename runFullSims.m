@@ -30,8 +30,8 @@ runWish = 1;
 %(except wishart normed to have approx. = norm to others
 numOptRuns = 5e4; % i think this can probably be smaller...
 % numOptRuns = 1e3;
-l_rate = 5e-3; % was 2.5e-5
-maxEpochs = 5e3; % was 3e3
+l_rate = 0.0025; % was 2.5e-5
+maxEpochs = 20000; % was 3e3
 
 
 a = 1000;
@@ -41,12 +41,12 @@ T = 100;
 M = 100;
 its = 101; %# of iterations for calculating median of lpWish
 sigCov = 1/1250;
-mkdir([pwd dirName]);
 sigPrParam = sigCov*eye(N);
 thet = exp(-3);
 bet = 0.4;
 nautyInstalled = 1; %best if it is, but if not, set to 0 (charles' code will be slower).
 
+mkdir([pwd dirName]);
 %variable containing the function implementing a neural network learning
 %algorithm
 nnFun = @runNN; %standard linear NN grad descent
