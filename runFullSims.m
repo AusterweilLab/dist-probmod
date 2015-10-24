@@ -43,7 +43,7 @@ its = 101; %# of iterations for calculating median of lpWish
 sigCov = 1/1250;
 mkdir([pwd dirName]);
 sigPrParam = sigCov*eye(N);
-thet = exp(-3);
+thet = exp(-2);
 bet = 0.4;
 nautyInstalled = 1; %best if it is, but if not, set to 0 (charles' code will be slower).
 
