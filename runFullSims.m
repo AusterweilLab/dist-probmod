@@ -30,7 +30,7 @@ runWish = 1;
 %(except wishart normed to have approx. = norm to others
 numOptRuns = 5e4; % i think this can probably be smaller...
 % numOptRuns = 1e3;
-l_rate = 5e-3; % was 2.5e-5
+l_rate = 0.9; % was 2.5e-5
 maxEpochs = 5e3; % was 3e3
 
 
