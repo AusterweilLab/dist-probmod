@@ -44,7 +44,7 @@ sigCov = 1/1250;
 mkdir([pwd dirName]);
 sigPrParam = sigCov*eye(N);
 thet = exp(-3);
-bet = 0.4;
+bet = 0.2;
 nautyInstalled = 1; %best if it is, but if not, set to 0 (charles' code will be slower).
 
 %variable containing the function implementing a neural network learning
