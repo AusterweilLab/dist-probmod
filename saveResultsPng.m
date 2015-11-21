@@ -2,6 +2,8 @@ load('may12Runs.mat');
 disp('------------------Starting analyses-------------------');
 disp('------------------Wishartiness-Bayes-NN dist analyses-------------------');
 meanBDists = mean(mean(bestBDists,3),2);
+meanBDists = meanBDists(1:length(meanBDists)-1);
+lpWishs = lpWishs(1:length(lpWishs)-1);
 meanTDists = mean(bestTDists,2);
 bNNCorPearson = corr(meanBDists, lpWishs);
 bNNCorSpearman = corr(meanBDists,lpWishs, 'type', 'Spearman');
@@ -13,13 +15,13 @@ disp(['Kendall correlation between best Bayes-NN Distance and Wishartiness: ' nu
 
 disp('---------------------------------------------------------------------');
 close all;
-f = figure();
+f = figure('Visible', 'Off');
 scatter(lpWishs, meanBDists, [], linspace(1,10,length(meanBDists)));
-labels = {'Part','Chain','Tree','Grid','erdosPs1','erdosPs2','erdosPs3','Wishart'}; dx = -0.4; dy = -0.4;
+labels = {'Part','Chain','Tree','Grid','erdosPs1','erdosPs2','erdosPs3'}; dx = -0.4; dy = -0.4;
 text(lpWishs+dx,meanBDists+dy, labels)
 xlabel('Log Wishart marginal likelihood');
 ylabel('Bayes-NN distance');
 title('Average distance YY^T from Bayesian estimators with different priors');
 gitinfo = getGitInfo();
-savefig(strcat(gitinfo.branch,'-plot.fig'));
+saveas(f, strcat(gitinfo.branch,'-plot.png'));
 exit();
