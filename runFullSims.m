@@ -40,7 +40,7 @@ N = 10;
 T = 100;
 M = 100;
 its = 101; %# of iterations for calculating median of lpWish
-sigCov = 1/1250;
+sigCov = 1/10;
 mkdir([pwd dirName]);
 sigPrParam = sigCov*eye(N);
 thet = exp(-3);
