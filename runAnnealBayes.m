@@ -26,26 +26,46 @@ for i = 1:I
     end
 end
 
-for t = 1:T
+erdosAnnealRes = cell(I, J, T);
+wishAnnealRes = cell(J, T);
+matlabpool(4)
+parfor t = 1:T
     disp(['cur t:' num2str(t) '     out of    ' num2str(T)]);
     for j = 1:J
-        load(files{(t-1)*J+j});
+        da = load(files{(t-1)*J+j});
+        data = da.data;
+        dslice = erdosAnnealRes(:,:,t);
         for k=1:length(erdosPs)
             [covMat bestLP] = simAnnealErdos(@erdosPost,data,numOptRuns,erdosPs(k),.4);
-            bayesSigs{k,j}(:,:,t) = reshape(covMat, [ N N 1]);
-            tBDists(k,j,t) = covMatDist(reshape(bayesSigs{k,j}(:,:,t), [N N]), ...
-                                        reshape(trueSigs{j}(:,:,t), [N N]));
+            dslice{j,k} = covMat;
+            erdosAnnealRes(:,:,t) = dslice;
         end
         if runWish
-            [covMat bestLP] = simAnneal(@wishPost,data,numOptRuns,b,10*eye(N));
-            bayesSigs{length(erdosPs)+1,j}(:,:,t) = reshape(covMat, [N N 1]);
+            [wishCovMat bestLP] = simAnneal(@wishPost,data,numOptRuns,b,10*eye(N));
+            wishAnnealRes{j,t} = wishCovMat;
+        end
+    end
+    disp(['t:' num2str(t) ' finished.']);
+end
+matlabpool close
+
+% add to bayesSigs
+disp('processing annealing results...');
+for t = 1:T
+    for j = 1:J
+        for k = 1:length(erdosPs)
+            covMat = erdosAnnealRes{k,j,t};
+            bayesSigs{k,j}(:,:,t) = reshape(covMat, [ N N 1]);
+            tBDists(k,j,t) = covMatDist(reshape(bayesSigs{k,j}(:,:,t), [N N]), ...
+                reshape(trueSigs{j}(:,:,t), [N N]));
+        end
+        if runWish
+            wishCovMat = wishAnnealRes{j,t};
+            bayesSigs{length(erdosPs)+1,j}(:,:,t) = reshape(wishCovMat, [N N 1]);
             
             tBDists(length(erdosPs)+1,j,t) = covMatDist(reshape(bayesSigs{length(erdosPs)+1,j}(:,:,t), [N N]), ...
-                                        reshape(trueSigs{j}(:,:,t), [N N]));
+                reshape(trueSigs{j}(:,:,t), [N N]));
         end
     end
 end
-
-
-end
-
+disp('finished processing annealing runs');
